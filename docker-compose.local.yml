@@ -1,0 +1,4 @@
+services:
+  taiga-gateway:
+    ports:
+      - "${TAIGA_BIND_ADDRESS:-127.0.0.1}:${TAIGA_PORT:-9000}:80"
