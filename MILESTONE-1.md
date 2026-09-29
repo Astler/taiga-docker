@@ -1,21 +1,24 @@
 # Milestone 1: custom frontend staging
 
 This repository is the deployment half of the PressF Taiga customization. The
-frontend source lives in `Astler/taiga-front` and is built directly by Docker
-Compose, so no external registry or GitHub Actions minutes are required.
+frontend source lives in the `taiga-front` Git submodule and is built directly
+by Docker Compose, so no external registry or GitHub Actions minutes are
+required.
 
 ## Staging flow
 
-1. Push the frontend `develop` branch. The `taiga-front` Compose service uses
-   that public Git branch as its Docker build context.
+1. Push the frontend `develop` branch and update the `taiga-front` submodule
+   pointer in this repository.
 2. Create a Git-based Docker Compose application in Coolify from this
    repository's `develop` branch during initial testing.
 3. Copy the keys from `.env.coolify.example` into the Coolify environment and
    provide all secret values there.
 4. Enable **Preserve Repository During Deployment** because the gateway mounts
    `taiga-gateway/taiga.conf` from the checked-out repository.
-5. Assign the public domain only to `taiga-gateway` on internal port `80`.
-6. Use new volumes for staging. Do not attach the production database or media
+5. Under **Advanced**, enable Git submodules so the frontend build context is
+   checked out before Docker Compose starts.
+6. Assign the public domain only to `taiga-gateway` on internal port `80`.
+7. Use new volumes for staging. Do not attach the production database or media
    volumes.
 
 The base Compose file intentionally does not publish a host port. For local or
@@ -43,6 +46,6 @@ data or changing the production domain.
 
 ## Rollback
 
-Rollback the frontend by changing the Git ref after `#` in the `taiga-front`
-build context to a previous release tag or commit SHA and redeploying. Backend
-migrations are outside this milestone; the official backend remains unchanged.
+Rollback the frontend by moving the `taiga-front` submodule pointer to a
+previous release commit and redeploying. Backend migrations are outside this
+milestone; the official backend remains unchanged.

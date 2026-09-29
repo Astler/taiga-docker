@@ -98,7 +98,7 @@ services:
 
   taiga-front:
     build:
-      context: "https://github.com/Astler/taiga-front.git#develop"
+      context: ./taiga-front
       dockerfile: docker/Dockerfile.custom
     environment:
       TAIGA_URL: "${TAIGA_SCHEME}://${TAIGA_DOMAIN}"

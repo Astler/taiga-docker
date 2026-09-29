@@ -1,0 +1,4 @@
+[submodule "taiga-front"]
+	path = taiga-front
+	url = https://github.com/Astler/taiga-front.git
+	branch = develop
